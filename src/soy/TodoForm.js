@@ -5,8 +5,31 @@ import Component from 'metal-component';
 import Soy from 'metal-soy';
 
 class TodoForm extends Component {
+
+	handleSubmit(event) {
+		event.preventDefault();
+
+		if (this.value) {
+			this.emit('todoAdd', {
+				title: this.value
+			});
+
+			// Clears the input value
+			this.value = '';
+		}
+	}
+
+	handleChange(event) {
+		this.value = event.target.value;
+	}
 }
 Soy.register(TodoForm, templates);
+
+TodoForm.STATE = {
+	value: {
+		value: ''
+	}
+};
 
 export { TodoForm };
 export default TodoForm;

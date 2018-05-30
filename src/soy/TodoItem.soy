@@ -4,9 +4,20 @@
  * This renders the component's whole content.
  */
 {template .render}
-	<li
-		class="todo-item"
+	{@param todo: ?}
+
+	{let $elementClasses kind="text"}
+		todo-item
+		 // Conditionally adding the 'todo-item-done' class if
+        // the todo is done
+        {if $todo.done}
+			{sp}todo-item-done
+		{/if}
+	{/let}
+
+	<li class="{$elementClasses}"
+		data-onclick="handleClick"
 	>
-		[TODO]
+		{$todo.title}
 	</li>
 {/template}
